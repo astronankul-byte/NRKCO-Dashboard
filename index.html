@@ -40,3 +40,30 @@ function login() {
 
 </body>
 </html>
+<input type="text" id="username">
+<input type="password" id="password">
+<button onclick="login()">Login</button>
+<script>
+function login() {
+  fetch("YOUR_WEB_APP_URL", {
+    method: "POST",
+    body: JSON.stringify({
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === "success") {
+      alert("Login Success");
+      window.location.href = "dashboard.html";
+    } else {
+      alert("Invalid Login");
+    }
+  })
+  .catch(err => {
+    alert("Error connecting to server");
+    console.log(err);
+  });
+}
+</script>
